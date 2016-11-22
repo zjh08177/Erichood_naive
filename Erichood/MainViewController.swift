@@ -31,9 +31,9 @@ class MainViewController: UIViewController, UIWebViewDelegate {
         
         self.view.addSubview(stockInput)
         self.view.addSubview(searchButton)
-        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(htmlSuccess), name:"checkHTML", object: nil)
-        //NSNotificationCenter.defaultCenter().postNotificationName("checkHTML", object: nil)
+
         self.addObserver(self, forKeyPath: "check", options: .New, context: nil)
+        
         loadStocks()
     }
     
@@ -109,24 +109,13 @@ class MainViewController: UIViewController, UIWebViewDelegate {
         
     }
     
-    func webViewDidStartLoad(webView: UIWebView) {
-        count = count + 1
-    }
-    
     func webViewDidFinishLoad(webView: UIWebView) {
-        count = count - 1
-        if count > 0 {
-            return
-        }
         p = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")
         if let range = p.rangeOfString("rating-text") {
             check = p
+            //this func is called multiple times and only at the last time we got the correct html, so use key-value observer.
         }
         
-    }
-    
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
-        count = count - 1
     }
     
     override func didReceiveMemoryWarning() {
@@ -143,28 +132,23 @@ class MainViewController: UIViewController, UIWebViewDelegate {
         print(stocks)
     }
     
-    func loadStockSingle(stockName: String) {
-        getZackStockAnalysis(stockName, completionHandler: { (o1) in
-            self.getBarchartStockAnalysis(stockName, completionHandler: { (o2) in
-                self.getMarketwatchStockAnalysis(stockName, completionHandler: { (o3) in
-                    //let ratio = (o2.substringToIndex(o2.rangeOfString("%")!.startIndex) as NSString).intValue
-                    print("\(stockName): \(o1) \(o2) \(o3)")
-                })
-            })
-        })
-
-    }
-    
     func didTapSearchButton(sender: UIButton) {
         print(stockAnalysis)
 
         if c >= stocks.count {
             return
         }
-        
         getYahooStockAnalysis(stocks[c])
         c = c + 1
+        
+        /* want to use the follow loop
+        for stock in stocks {
+            getYahooStockAnalysis(stock)
+        }
+        */
     }
+    
+    //MARK: get URL from website
     
     func urlToBarchart(stockName: String?) -> NSURL? {
         if let name = stockName {
@@ -223,6 +207,8 @@ class MainViewController: UIViewController, UIWebViewDelegate {
             task.resume()
         }
     }
+    
+    // get Analysis from website
     
     func getMarketwatchStockAnalysis(stockName: String, completionHandler: ((String) -> Void)) {
         if let url = urlToMarketwatch(stockName) {
@@ -302,45 +288,6 @@ class MainViewController: UIViewController, UIWebViewDelegate {
     }
     
     
-    func getStocks() {
-        if let url = NSURL(string: "ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt") {
-            let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: { (data, response, error) in
-                if error != nil {
-                    print(error?.localizedDescription)
-                } else {
-                    let urlContent = NSString(data: data!, encoding: NSASCIIStringEncoding) as String!
-
-                    var fragment = urlContent
-                    
-                    while fragment.characters.count > 1 {
-                        fragment = fragment.substringFromIndex(fragment.rangeOfString("\n")!.endIndex)
-                        let stock = fragment.substringToIndex(fragment.rangeOfString("|")!.startIndex)
-                        self.stocks.append(stock)
-                    }
-                    print("finished!!!!!!!!!")
-                    
-                    if let url2 = NSURL(string: "ftp://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt") {
-                        let task2 = NSURLSession.sharedSession().dataTaskWithURL(url2, completionHandler: { (data, response, error) in
-                            if error != nil {
-                                print(error?.localizedDescription)
-                            } else {
-                                let urlContent = NSString(data: data!, encoding: NSASCIIStringEncoding) as String!
-                                
-                                var fragment = urlContent
-                                
-                                while fragment.characters.count > 1 {
-                                    fragment = fragment.substringFromIndex(fragment.rangeOfString("\n")!.endIndex)
-                                    let stock = fragment.substringToIndex(fragment.rangeOfString("|")!.startIndex)
-                                    self.stocks.append(stock)
-                                }
-                            }
-                        })
-                        task2.resume()
-                    }
-                }
-            })
-            task.resume()
-        }
-    }
+    
 }
 
