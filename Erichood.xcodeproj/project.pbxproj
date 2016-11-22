@@ -14,6 +14,7 @@
 		F6331D461DE0ECD600277DC2 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6331D451DE0ECD600277DC2 /* Button.swift */; };
 		F6331D481DE0FAC900277DC2 /* TextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6331D471DE0FAC900277DC2 /* TextLabel.swift */; };
 		F66BB2911DE2785500566C1B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BB2901DE2785500566C1B /* File.swift */; };
+		F697A62F1DE36730009B4A30 /* script.js in Resources */ = {isa = PBXBuildFile; fileRef = F697A62E1DE36730009B4A30 /* script.js */; };
 		F6DC156E1DE0E38B0048E8C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DC156D1DE0E38B0048E8C0 /* AppDelegate.swift */; };
 		F6DC15701DE0E38B0048E8C0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6DC156F1DE0E38B0048E8C0 /* MainViewController.swift */; };
 		F6DC15751DE0E38B0048E8C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6DC15741DE0E38B0048E8C0 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		F6331D451DE0ECD600277DC2 /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		F6331D471DE0FAC900277DC2 /* TextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextLabel.swift; sourceTree = "<group>"; };
 		F66BB2901DE2785500566C1B /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		F697A62E1DE36730009B4A30 /* script.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = script.js; sourceTree = "<group>"; };
 		F6DC156A1DE0E38B0048E8C0 /* Erichood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Erichood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6DC156D1DE0E38B0048E8C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6DC156F1DE0E38B0048E8C0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				F6331D451DE0ECD600277DC2 /* Button.swift */,
 				F6331D471DE0FAC900277DC2 /* TextLabel.swift */,
 				F66BB2901DE2785500566C1B /* File.swift */,
+				F697A62E1DE36730009B4A30 /* script.js */,
 			);
 			path = Erichood;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6DC15751DE0E38B0048E8C0 /* Assets.xcassets in Resources */,
+				F697A62F1DE36730009B4A30 /* script.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
